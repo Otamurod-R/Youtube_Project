@@ -23,7 +23,7 @@ def deleting_video_db(video_id):
         return f'{Video.name} has been deleted'
     return 'No such video file was found'
 
-def getting_video_db(video_id):
+def getting_videos_db(video_id):
     db=next(get_db())
 
     exact_vedio=db.query(Video).filter_by(id=video_id).first()
@@ -40,8 +40,26 @@ def getting_all_vidieos_db(video_name):
         return all_vedio
     return f'No video with {video_name} has been found'
 
-def changing_video_discription(id, new_data):
+def changing_video_description_db(id, new_data):
     db=next(get_db())
-    pass
+
+    exact_video=db.query(Video).filter_by(id=id).first()
+    if exact_video:
+        exact_video.description=new_data
+        db.commit()
+        return 'description has been updated'
+    return 'changes cannot be saved'
+
+def changing_video_name_db(id, new_name):
+    db=next(get_db())
+
+    exact_name=db.query(Video).filter_by(id=id).first()
+
+    if exact_name:
+        exact_name.name=new_name
+        db.commit()
+        return f'Name has been updated to {exact_name}'
+    return 'changes cannot be saved'
+
 
 

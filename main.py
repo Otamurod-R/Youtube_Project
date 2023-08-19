@@ -10,6 +10,9 @@ app=FastAPI()
 
 #here we import all the files from api package to run the website for visuals
 # example: from api.comments_api import comments
+from api.video_api import video_api
+from api.playlsit_api import play_list
+from user_api import users
 
 
 

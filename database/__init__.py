@@ -3,6 +3,7 @@ from sqlalchemy import create_engine #this is neccessary and starting point to c
 from sqlalchemy.ext.declarative import declarative_base #this is to create tables and use the metadata variables (int, str, dict, ...)
 from sqlalchemy.orm import sessionmaker #this is to connect user and database by creating sessions
 
+
 #create connection with posthres
 SQLALCHEMY_DATABASE_URI='postgresql://postgres:Otashchik@localhost/youtube'
 engine=create_engine(SQLALCHEMY_DATABASE_URI)

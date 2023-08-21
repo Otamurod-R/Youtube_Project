@@ -1,7 +1,7 @@
-from database.user_services import register_user_db, change_user_data_db, check_user_data_db, \
+from database.user_services import register_user_db, change_user_data_db, \
     check_user_password_email_db, profile_info_db
 from fastapi import Request
-from api import app
+from main import app
 from pydantic import BaseModel
 import re
 

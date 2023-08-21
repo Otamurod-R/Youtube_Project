@@ -2,7 +2,7 @@ from database import get_db
 from database.models import User
 from datetime import datetime
 
-#register user
+
 def register_user_db(name, email, user_coutry, phone_number, password):
     db=next(get_db())
 
@@ -13,7 +13,6 @@ def register_user_db(name, email, user_coutry, phone_number, password):
     db.commit()
     return new_user.id
 
-'''checking if the user has alredy had an account'''
 
 def check_user_data_db(phone_number, email):
     db=next(get_db())
@@ -21,33 +20,30 @@ def check_user_data_db(phone_number, email):
     '''checking database for the user'''
     checker=db.query(User).filter_by(phone_number=phone_number, email=email).first()
 
-    '''if user has an account, we will return false'''
     if checker:
         return False
-    '''if they don't have account return true'''
     return True
 
-'''checking the user password'''
+
 def check_user_password_email_db(email, password):
     db=next(get_db())
 
     '''try to find the user by email first'''
     checker=db.query(User).filter_by(email=email).first()
 
-    '''after we find email, then we will compare password'''
+
     if checker:
         if checker.password==password:
             return checker.id
         else:
             return 'Wrong password '
-    '''if we did not get the email'''
+
     return 'Wrong email has been indicated'
 
-'''getting user personal info'''
+
 def profile_info_db(user_id):
     db=next(get_db())
 
-    '''finding user via their id'''
     exact_user=db.query(User).filter_by(id=user_id).first()
 
     '''if we have the user, we should show all the info'''
@@ -57,7 +53,7 @@ def profile_info_db(user_id):
             exact_user.reg_date,
     return 'No Such User account'
 
-'''chenaging user data'''
+
 def change_user_data_db(user_id, change_info, new_data):
     db=next(get_db())
 
@@ -77,7 +73,6 @@ def change_user_data_db(user_id, change_info, new_data):
             exact_user.password=new_data
 
         db.commit()
-    return 'Data has been successfully changed'
+        return 'Data has been successfully changed'
 
-    '''if we did not find the user or he did not enter by forgetting login info'''
     return 'User was not found'

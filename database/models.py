@@ -18,7 +18,7 @@ class Video(Base):
     duration=Column(Integer, nullable=False)
     name=Column(String, nullable=False)
     reg_date=Column(DateTime)
-    user_id=Column(BigInteger, ForeignKey('user.id'))
+    user_id=Column(BigInteger, ForeignKey('users.user_id'))
     video_path=Column(String, nullable=False)
     description=Column(String, )
 
@@ -36,4 +36,16 @@ class Playlist(Base):
 
     user_fk=relationship(User, lazy='subquery')
     video_fk=relationship(Video, lazy='subquery')
+
+
+class Shorts(Base):
+    __tablename__='shorts'
+    id=Column(BigInteger, autoincrement=True, primary_key=True)
+    name=Column(String, nullable=False)
+
+    user_id = Column(BigInteger, ForeignKey('users.user_id'))
+    video_id = Column(BigInteger, ForeignKey('videos.id'))
+
+    user_fk = relationship(User, lazy='subquery')
+    video_fk = relationship(Video, lazy='subquery')
 

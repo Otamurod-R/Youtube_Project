@@ -1,4 +1,4 @@
-from api import app
+from main import app
 from fastapi import Request
 from database.playlist_services import create_playlist_db, deleting_playlist_db, deleting_video_from_playlist_db
 

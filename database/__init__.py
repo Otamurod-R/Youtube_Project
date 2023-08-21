@@ -11,7 +11,7 @@ SessionLocal=sessionmaker(bind=engine)
 Base=declarative_base()
 
 #import our models to generate object and sessions to work
-from database.models import *
+from database.models import User, Video, Playlist, Shorts
 
 #create function to make objections
 def get_db():

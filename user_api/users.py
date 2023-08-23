@@ -35,8 +35,8 @@ async def register_user(user_model:User):
 
 
 @app.get('/api/user')
-async def get_user_info(user_id: int):
-    exact_user=profile_info_db(user_id)
+async def get_user_info(id: int):
+    exact_user=profile_info_db(id)
 
     return {'status':1, "message": exact_user}
 
@@ -53,7 +53,7 @@ async def login_user(email: str, password: str):
 
 
 @app.put('/api/change_info')
-async def change_user_profile(user_id: int, change_info: str, new_data:str):
-    data=change_user_data_db(user_id, change_info, new_data)
+async def change_user_profile(id: int, change_info: str, new_data:str):
+    data=change_user_data_db(id, change_info, new_data)
 
     return {'status': 1, "message": data}

@@ -1,10 +1,10 @@
 from database import get_db
 from database.models import Shorts
 
-def create_shorts_db(id, name, user_id, video_id):
+def create_shorts_db(name, user_id, video_id):
     db=next(get_db())
 
-    new_shorts=Shorts(id=id, name=name, user_id=user_id, video_id=video_id)
+    new_shorts=Shorts(name=name, user_id=user_id, video_id=video_id)
     db.add(new_shorts)
     db.commit()
 

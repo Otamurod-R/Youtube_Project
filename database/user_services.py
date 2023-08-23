@@ -3,15 +3,15 @@ from database.models import User
 from datetime import datetime
 
 
-def register_user_db(name, email, user_coutry, phone_number, password):
+def register_user_db(name, email, user_country, phone_number, password):
     db=next(get_db())
 
-    new_user=User(name=name, email=email, user_city=user_coutry, phone_number=phone_number, password=password,
+    new_user=User(name=name, email=email, user_country=user_country, phone_number=phone_number, password=password,
                   reg_date=datetime.now())
 
     db.add(new_user)
     db.commit()
-    return new_user.id
+    return new_user.user_id
 
 
 def check_user_data_db(phone_number, email):
@@ -34,7 +34,7 @@ def check_user_password_email_db(email, password):
 
     if checker:
         if checker.password==password:
-            return checker.id
+            return checker.user_id
         else:
             return 'Wrong password '
 
@@ -44,12 +44,12 @@ def check_user_password_email_db(email, password):
 def profile_info_db(user_id):
     db=next(get_db())
 
-    exact_user=db.query(User).filter_by(id=user_id).first()
+    exact_user=db.query(User).filter_by(user_id=user_id).first()
 
     '''if we have the user, we should show all the info'''
     if exact_user:
         return exact_user.email, exact_user.phone_number, \
-            exact_user.user_city, exact_user.id, exact_user.name, \
+            exact_user.user_city, exact_user.user_id, exact_user.name, \
             exact_user.reg_date,
     return 'No Such User account'
 
@@ -57,7 +57,7 @@ def profile_info_db(user_id):
 def change_user_data_db(user_id, change_info, new_data):
     db=next(get_db())
 
-    exact_user=db.query(User).filter_by(id=user_id).first()
+    exact_user=db.query(User).filter_by(user_id=user_id).first()
 
     '''checking what personal datat user wants to change'''
     if exact_user:

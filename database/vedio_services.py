@@ -3,10 +3,10 @@ from database.models import Video
 from datetime import datetime
 
 
-def adding_new_video_db(id:int, duration:int, name:str, user_id: int, video_path: str, description:str):
+def adding_new_video_db(duration:int, name:str, user_id: int, video_path: str, description:str):
     db=next(get_db())
 
-    new_video=Video(id=id, name=name, duration=duration,
+    new_video=Video(name=name, duration=duration,
                     user_id=user_id, video_path=video_path, description=description, reg_date=datetime.now())
     db.add(new_video)
     db.commit()

@@ -5,7 +5,7 @@ from database.vedio_services import adding_new_video_db, deleting_video_db, chan
 from pydantic import BaseModel
 
 class Video(BaseModel):
-    id: int
+
     duration: int
     name: str
     user_id: int
@@ -16,15 +16,15 @@ class Video(BaseModel):
 async def adding_video(video_model: Video):
     new_video = dict(video_model)
 
-    adding_video = adding_new_video_db(**new_video)
-    if adding_video:
-        try:
-            new_video1 = adding_new_video_db(**adding_video)
-            return {'statsus': 1, 'message': new_video1}
-        except Exception as e:
-            return {'status': 1, 'message': e}
+    #adding_video = adding_new_video_db(**new_video)
 
-    return {'status': 0, 'message': 'Please check data entry'}
+    try:
+        new_video1 = adding_new_video_db(**new_video)
+        return {'statsus': 1, 'message': new_video1}
+    except Exception as e:
+        return {'status': 1, 'message': str(e)}
+
+    #return {'status': 0, 'message': 'Please check data entry'}
 
 @app.delete('/api/delete_video')
 async def deleting_video(id: int):
@@ -44,7 +44,7 @@ async def deleting_video(id: int):
     #     return {'status': 1, 'message': 'video has been deleted'}
     # return {'status': 0, 'message': 'Wrong data entry'}
 
-@app.get('/api/video')
+@app.get('/api/video_name')
 async def getting_all_video(name:str):
     by_name = getting_all_vidieos_db(name)
     return {'status': 1, 'message': by_name}

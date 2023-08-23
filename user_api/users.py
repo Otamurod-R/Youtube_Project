@@ -18,7 +18,7 @@ class User(BaseModel):
     email: str
     phone_number: int
     password: str
-    user_city: str
+    user_country: str
 
 @app.post('/api/registeration')
 async def register_user(user_model:User):
@@ -30,6 +30,7 @@ async def register_user(user_model:User):
             reg_user=register_user_db(**user_data)
             return {'status': 1, 'user_id': reg_user}
         except Exception as e:
+            print(e)
             return {"status": 1, 'message': e}
     return {'status': 0, 'message': 'Invalid email'}
 
